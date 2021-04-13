@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<!-- 导航
+				92行开始转动的电影内容（热评）
+				180行 popular
+				277行 highest score
+				377行 Guess You Like
+	-->
+	<title>Homeyeap</title>
 	<meta name="author" content="order by womengda.cn/" />
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<!-- Custom Theme files -->
@@ -13,8 +19,10 @@
 	<!-- Custom Theme files -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="My Show Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+	<meta name="keywords" content="My Show Responsive web template, Bootstrap Web Templates,
+	Flat Web Templates, Andriod Compatible web template,
+	Smartphone Compatible web template, free webdesigns for Nokia,
+	Samsung, LG, SonyErricsson, Motorola web design" />
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 	<!-- start menu -->
@@ -27,7 +35,7 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$('#horizontalTab').easyResponsiveTabs({
-			            type: 'default', //Types: default, vertical, accordion           
+			            type: 'default', //Types: default, vertical, accordion
 			            width: 'auto', //auto or any width like 600px
 			            fit: true   // 100% fit in a container
 			        });
@@ -43,13 +51,12 @@
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
+		$(".scroll").click(function(event){
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
 	});
 </script>
-<!---- start-smoth-scrolling---->
 
 </head>
 <body>
@@ -148,19 +155,19 @@
 							visibleItems: 5,
 							animationSpeed: 1000,
 							autoPlay: true,
-							autoPlaySpeed: 3000,    		
+							autoPlaySpeed: 3000,
 							pauseOnHover: false,
 							enableResponsiveBreakpoints: true,
-							responsiveBreakpoints: { 
-								portrait: { 
+							responsiveBreakpoints: {
+								portrait: {
 									changePoint:480,
 									visibleItems: 2
-								}, 
-								landscape: { 
+								},
+								landscape: {
 									changePoint:640,
 									visibleItems: 3
 								},
-								tablet: { 
+								tablet: {
 									changePoint:800,
 									visibleItems: 4
 								}
@@ -168,7 +175,7 @@
 						});
 					});
 				</script>
-				<script type="text/javascript" src="js/jquery.flexisel.js"></script>	
+				<script type="text/javascript" src="js/jquery.flexisel.js"></script>
 			</div>
 			<div class="footer-top-grid">
 				<div class="list-of-movies col-md-8">
@@ -259,7 +266,7 @@
 										<a>The movie is directed by xxx</a>
 										<p>Tom:this movie is great</p>
 										<p>Bob:that is so excellent</p>
-									</div>								 
+									</div>
 									<div class="f-buy-tickets">
 										<a href="movie-select-show.html">DETAIL</a>
 									</div>
@@ -270,7 +277,7 @@
 					</div>
 					<div class="clearfix"></div>
 					<div class="featured">
-						<h4>Hign Score</h4>
+						<h4>Highest Score</h4>
 						<ul>
 							<li>
 								<div class="f-movie">
@@ -356,7 +363,7 @@
 										<a>The movie is directed by xxx</a>
 										<p>Tom:this movie is great</p>
 										<p>Bob:that is so excellent</p>
-									</div>								 
+									</div>
 									<div class="f-buy-tickets">
 										<a href="movie-select-show.html">DETAIL</a>
 									</div>
@@ -421,7 +428,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="clearfix"></div>			
+				<div class="clearfix"></div>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -434,7 +441,7 @@
 					  			containerID: 'toTop', // fading element id
 								containerHoverID: 'toTopHover', // fading element hover id
 								scrollSpeed: 1200,
-								easingType: 'linear' 
+								easingType: 'linear'
 					 		};
 					 		*/
 
