@@ -7,6 +7,38 @@
 				277行 highest score
 				377行 Guess You Like
 	-->
+
+	<?php
+//database
+$db_hostname = "rm-d7oxcn1pw78ncu9952o.mysql.eu-west-1.rds.aliyuncs.com";
+$db_database = "kiwi_test";
+$db_username = "team39";
+$db_password = "Comp20839";
+$db_charset = "utf8mb4";
+$dsn = "mysql:host=$db_hostname;dbname=$db_database;charset=$db_charset";
+$opt = array(
+  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+  PDO::ATTR_EMULATE_PREPARES => false);
+  try {
+		$pdo = new PDO($dsn,$db_username,$db_password,$opt);
+
+		$stmt = $pdo->query("select title from movie limit 100");#where module='$module'
+		foreach($stmt as $row) {//
+		 echo "name=",$row["title"],"<br>";
+		 #echo "<p1>$row["time"]</p1>";
+		}
+
+		$pdo = NULL;
+		} catch (PDOException $e) {
+		exit("PDO Error: ".$e->getMessage()."<br>");
+		}
+		?>
+
+
+
+
+
 	<title>Homeyeap</title>
 	<meta name="author" content="order by womengda.cn/" />
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
@@ -95,7 +127,7 @@
 			<ul id="flexiselDemo1">
 				<li>
 					<a><img src="images/r1.jpg" alt=""/></a>
-					<div class="slide-title"><h4>looked up one of the more Contrary to popular </div>
+					<div class="slide-title"><h4>ilove this </div>
 						<div class="date-city">
 							<div class="buy-tickets">
 								<a href="movie-select-show.html">DETAIL</a>
@@ -104,7 +136,7 @@
 					</li>
 					<li>
 						<a><img src="images/r2.jpg" alt=""/></a>
-						<div class="slide-title"><h4>There are many 'variations' belief</h4></div>
+						<div class="slide-title"><h4>very good</h4></div>
 						<div class="date-city">
 							<div class="buy-tickets">
 								<a href="movie-select-show.html">DETAIL</a>
