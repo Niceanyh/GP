@@ -9,7 +9,8 @@
 <?php
 $test=[1,2,3];
 if ($test) {
-  echo "its just a git test";
+  echo "its just a git test//yes";
+  echo "night test successful";
 }
 
  ?>
