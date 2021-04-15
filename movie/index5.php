@@ -137,9 +137,9 @@ echo "--------------------------<br>";
 				foreach($poster_path as $row) {
 				 $film_poster=$row['poster_path'];
 				 //echo $film_poster;
-				 //echo "<img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=350 width=300><br>";
+				 //echo "<img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=235 width=290><br>";
 				 //echo $row['poster_path'],"<br>";
-				 echo "<li><a><img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=235 width=290></a>";
+				 echo "<li><a><img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=270 width=130></a>";
 				 echo "<div class=\"slide-title\"><h4>this is comment </h4></div>";
 				 echo "<div class=\"date-city\">";
 					 echo "<div class=\"buy-tickets\">";
@@ -277,7 +277,7 @@ echo "--------------------------<br>";
 										<p>Bob:that is so excellent</p>
 									</div>
 									<div class="f-buy-tickets">
-										<a href="movie-select-show.html">DETAIL</a>
+										<a href="movie-select-show.html">DETAILs</a>
 									</div>
 								</div>
 							</li>
