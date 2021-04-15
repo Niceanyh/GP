@@ -7,7 +7,6 @@
 				277行 highest score
 				377行 Guess You Like
 	-->
-
 	<?php
 //database
 $db_hostname = "rm-d7oxcn1pw78ncu9952o.mysql.eu-west-1.rds.aliyuncs.com";
@@ -23,21 +22,27 @@ $opt = array(
   try {
 		$pdo = new PDO($dsn,$db_username,$db_password,$opt);
 
-		$stmt = $pdo->query("select title from movie limit 100");#where module='$module'
+		$stmt = $pdo->query("select title from movie limit 4");#where module='$module'
 		foreach($stmt as $row) {//
-		 echo "name=",$row["title"],"<br>";
+		 echo "___film__     ",$row["title"],"<br>";
+		 //echo "year:",$row["title"],"";
 		 #echo "<p1>$row["time"]</p1>";
 		}
-
-		$pdo = NULL;
-		} catch (PDOException $e) {
-		exit("PDO Error: ".$e->getMessage()."<br>");
+		//
+echo "--------------------------<br>";
+		$stmt = $pdo->query("select poster_path,title from movie limit 4");#where module='$module'
+		foreach($stmt as $row) {//
+		 $film_poster=$row['poster_path'];
+		 echo "movie: ",$row['title'],"<br>";
+		 echo "<img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=220 width=150><br>";
+		 echo $row['poster_path'],"<br>";
+		 //echo "year:",$row["title"],"";
+		 #echo "<p1>$row["time"]</p1>";
 		}
+		//
+
+
 		?>
-
-
-
-
 
 	<title>Homeyeap</title>
 	<meta name="author" content="order by womengda.cn/" />
@@ -125,57 +130,29 @@ $opt = array(
 		<!-- AddThis Smart Layers END -->
 		<div class="review-slider">
 			<ul id="flexiselDemo1">
-				<li>
-					<a><img src="images/r1.jpg" alt=""/></a>
-					<div class="slide-title"><h4>ilove this </div>
-						<div class="date-city">
-							<div class="buy-tickets">
-								<a href="movie-select-show.html">DETAIL</a>
-							</div>
-						</div>
-					</li>
+
+				<?php
+
+				$poster_path = $pdo->query("select poster_path from movie limit 5");#where module='$module'
+				foreach($poster_path as $row) {
+				 $film_poster=$row['poster_path'];
+				 //echo $film_poster;
+				 //echo "<img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=350 width=300><br>";
+				 //echo $row['poster_path'],"<br>";
+				 echo "<li><a><img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=235 width=290></a>";
+				 echo "<div class=\"slide-title\"><h4>this is comment </h4></div>";
+				 echo "<div class=\"date-city\">";
+					 echo "<div class=\"buy-tickets\">";
+					 echo "<a href=\"movie-select-show.html\">DETAIL</a>";
+					echo "</div></div>";
+					echo "</li>";
+		}
+		?>
 					<li>
-						<a><img src="images/r2.jpg" alt=""/></a>
-						<div class="slide-title"><h4>very good</h4></div>
+						<a><img src="images/r4.jpg" height=240 width=300></a><div class="slide-title"><h4>TEST</h4></div>
 						<div class="date-city">
 							<div class="buy-tickets">
-								<a href="movie-select-show.html">DETAIL</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<a><img src="images/r3.jpg" alt=""/></a>
-						<div class="slide-title"><h4>Finibus Bonorum et Malorum more 'Contrary'</h4></div>
-						<div class="date-city">
-							<div class="buy-tickets">
-								<a href="movie-select-show.html">DETAIL</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<a><img src="images/r4.jpg" alt=""/></a>
-						<div class="slide-title"><h4>Lorem Ipsum is simply Bonorum</h4></div>
-						<div class="date-city">
-							<div class="buy-tickets">
-								<a href="movie-select-show.html">DETAIL</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<a><img src="images/r5.jpg" alt=""/></a>
-						<div class="slide-title"><h4>Lorem Ipsum is simply Bonorum</h4></div>
-						<div class="date-city">
-							<div class="buy-tickets">
-								<a href="movie-select-show.html">DETAIL</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<a><img src="images/r6.jpg" alt=""/></a>
-						<div class="slide-title"><h4>Lorem Ipsum is simply Bonorum</h4></div>
-						<div class="date-city">
-							<div class="buy-tickets">
-								<a href="movie-select-show.html">DETAIL</a>
+								<a href="movie-select-show.html">TEST</a>
 							</div>
 						</div>
 					</li>
@@ -407,57 +384,33 @@ $opt = array(
 				</div>
 				<div class="right-side-bar">
 					<div class="top-movies-in-india">
+
+						<?php
+						//$film_name = $pdo->query("select title from movie limit 4");#where module='$module'
+						 ?>
 						<h4>Guess You Like</h4>
+<?php
+						$film_name = $pdo->query("select title,vote_average from movie limit 15");
+						foreach($film_name as $row) {//
+						 //echo "___film__     ",$row["title"],"<br>";
+						 //echo "year:",$row["title"],"";
+						 #echo "<p1>$row["time"]</p1>";
+						 echo "
+						 <ul class=\"mov_list\">
+						  <li><i class=\"fa fa-star\"></i></li>
+						  <li>",$row["vote_average"],"</li>
+						  <li><a href=\"movie-select-show.html\">",$row["title"],"</a></li>
+						 </ul>
+						 ";
+
+						}
+						?>
 						<ul class="mov_list">
 							<li><i class="fa fa-star"></i></li>
-							<li>8.0</li>
-							<li><a href="movie-select-show.html">Jurassic World (3D) (U/A)</a></li>
+							<li>100</li>
+							<li><a href="movie-select-show.html">TEST</a></li>
 						</ul>
-						<ul class="mov_list">
-							<li><i class="fa fa-star"></i></li>
-							<li>7.6</li>
-							<li><a href="movie-select-show.html">Jurassic World (3D Hindi) (U/A)</a></li>
-						</ul>
-						<ul class="mov_list">
-							<li><i class="fa fa-star"></i></li>
-							<li>8.1</li>
-							<li><a href="movie-select-show.html">Dil Dhadakne Do (U/A)</a></li>
-						</ul>
-						<ul class="mov_list">
-							<li><i class="fa fa-star"></i></li>
-							<li>6.1</li>
-							<li><a href="movie-select-show.html">Hamari Adhuri Kahani (U)</a></li>
-						</ul>
-						<ul class="mov_list">
-							<li><i class="fa fa-star"></i></li>
-							<li>7.2</li>
-							<li><a href="movie-select-show.html">Premam (U)</a></li>
-						</ul>
-						<ul class="mov_list">
-							<li><i class="fa fa-star"></i></li>
-							<li>9.0</li>
-							<li><a href="movie-select-show.html">Tanu Weds Manu Returns (U/A)</a></li>
-						</ul>
-						<ul class="mov_list">
-							<li><i class="fa fa-star"></i></li>
-							<li>9.9</li>
-							<li><a href="movie-select-show.html">Romeo Juliet (U)</a></li>
-						</ul>
-						<ul class="mov_list">
-							<li><i class="fa fa-star"></i></li>
-							<li>2.0</li>
-							<li><a href="movie-select-show.html">Jurassic World (IMAX 3D) (U/A)</a></li>
-						</ul>
-						<ul class="mov_list">
-							<li><i class="fa fa-star"></i></li>
-							<li>7.0</li>
-							<li><a href="movie-select-show.html">Jurassic World (2D Hindi) (U/A)</a></li>
-						</ul>
-						<ul class="mov_list">
-							<li><i class="fa fa-star"></i></li>
-							<li>10.0</li>
-							<li><a href="movie-select-show.html">Kaaka Muttai (U)</a></li>
-						</ul>
+
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -485,3 +438,10 @@ $opt = array(
 
 					</body>
 					</html>
+
+		<?php
+		$pdo = NULL;
+		} catch (PDOException $e) {
+		exit("PDO Error: ".$e->getMessage()."<br>");
+		}
+		 ?>
