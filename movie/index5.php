@@ -1,3 +1,6 @@
+<?php
+session_start();// 存储 session 数据
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +11,7 @@
 				377行 Guess You Like
 	-->
 	<?php
+	echo "session: ",$_SESSION['email'],"<br>";
 //database
 $db_hostname = "rm-d7oxcn1pw78ncu9952o.mysql.eu-west-1.rds.aliyuncs.com";
 $db_database = "kiwi_test";
