@@ -25,7 +25,7 @@ $opt = array(
   PDO::ATTR_EMULATE_PREPARES => false);
   try {
 		$pdo = new PDO($dsn,$db_username,$db_password,$opt);
-
+/*
 		$stmt = $pdo->query("select title from movie limit 4");#where module='$module'
 		foreach($stmt as $row) {//
 		 echo "___film__     ",$row["title"],"<br>";
@@ -45,7 +45,7 @@ echo "--------------------------<br>";
 		}
 		//
 
-
+*/
 		?>
 
 	<title>Homeyeap</title>
@@ -129,13 +129,25 @@ echo "--------------------------<br>";
 				<div id="defaultmenu" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="personal-information.html">
-							<?php echo $_SESSION['email']; ?>
+							<?php
+							if(isset($_SESSION['email'])){
+								echo $_SESSION['email'];
+							}else {
+								echo "Vistor";
+							}
+							?>
 						</a></li>
+<!-- onclick="<script type="text/javascript">
+	alert("log out successfully");
+</script> " <li><a href="../index.php" >Logout</a></li>-->
+<script type="text/javascript">
+function fun1(){
+	 alert("log out successfully!");
+	 //document.write("<meta http-equiv=\"refresh\" content=\"0;url=index.php\">";);
+}
 
-						<li><a href="../index.php" onclick="<script type="text/javascript">
-							alert("log out successfully");
-
-							</script>">Logout</a></li>
+</script>
+						<li><a href="../logout.php"> Logout</button></li>
 					</ul>
 				</div><!-- end #navbar-collapse-1 -->
 
@@ -404,20 +416,25 @@ echo "--------------------------<br>";
 						 ?>
 						<h4>Guess You Like</h4>
 <?php
-						$film_name = $pdo->query("select title,vote_average from movie limit 15");
-						foreach($film_name as $row) {//
-						 //echo "___film__     ",$row["title"],"<br>";
-						 //echo "year:",$row["title"],"";
-						 #echo "<p1>$row["time"]</p1>";
-						 echo "
-						 <ul class=\"mov_list\">
-						  <li><i class=\"fa fa-star\"></i></li>
-						  <li>",$row["vote_average"],"</li>
-						  <li><a href=\"movie-select-show.html\">",$row["title"],"</a></li>
-						 </ul>
-						 ";
+if(isset($_SESSION['email'])){
+	$film_name = $pdo->query("select title,vote_average from movie limit 15");
+	foreach($film_name as $row) {//
+	 //echo "___film__     ",$row["title"],"<br>";
+	 //echo "year:",$row["title"],"";
+	 #echo "<p1>$row["time"]</p1>";
+	 echo "
+	 <ul class=\"mov_list\">
+		<li><i class=\"fa fa-star\"></i></li>
+		<li>",$row["vote_average"],"</li>
+		<li><a href=\"movie-select-show.html\">",$row["title"],"</a></li>
+	 </ul>
+	 ";
 
-						}
+	}
+}else {//this is html file, need to be beautified
+	echo "<h3><font color=red>you need login to see it</font></h3>";
+}
+
 						?>
 						<ul class="mov_list">
 							<li><i class="fa fa-star"></i></li>

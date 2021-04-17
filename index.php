@@ -74,6 +74,7 @@ if (checkEmpty($email,$password)) {
 			</Script></head></html>'."<meta http-equiv=\"refresh\" content=\"0;url=index.php\">";
 		 }else{
 			 	//$_SESSION['name']=$name;
+				$_SESSION['admin']= true;
 				$_SESSION['email']=$email;
 				echo '<html><head><Script Language="JavaScript">alert("login successfully");
 			  </Script></head></html>'."<meta http-equiv=\"refresh\" content=\"0;url=movie/index5.php\">";
