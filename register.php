@@ -28,32 +28,14 @@ $opt = array(
   try {
    $pdo = new PDO($dsn,$db_username,$db_password,$opt);
 
-	 $stmt = $pdo->query("select email from user");#where module='$module'
-	 foreach($stmt as $row) {//
-	 	echo "email=",$row["email"],"\n";
+	 //$stmt = $pdo->query("select email from user");#where module='$module'
+	 //foreach($stmt as $row) {//
+	 	//echo "email=",$row["email"],"\n";
 	 	#echo "<p1>$row["time"]</p1>";
-	 }
 
 
-	 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	 	$email=$_POST['email'];
-	 	$password=$_POST['password'];
-	 	$password2=$_POST['password2'];
-	 	if(checkEmpty($email,$password,$password2)){
-	 	  if(checkEmail($email)){
-	 	    if(checkpwd($password,$password2)){
-	 	      //$verify_code  = codestr();
-	 	      if(insert($email,$password)){
-	 					echo '<html><head><Script Language="JavaScript">alert("register successfully!");</Script></head></html>'.
-	 			    "<meta http-equiv=\"refresh\" content=\"0;url=index.php\">";//注册完成，跳转到登陆页面
-	 	        //echo"register successfully!";
-	 	        //echo '<script>location.href="./index.php"</script>';//注册完成，跳转到登陆页面
-	 					//GRANT ALL PRIVILEGES ON *.* TO ‘testuser’@'%’ IDENTIFIED BY ‘testpassword’ WITH GRANT OPTION;
-	 	      }
-	 	    }
-	 	  }
-	 	}
-	 }
+
+
 
 
 function checkEmpty($email,$password,$password2){
@@ -67,11 +49,21 @@ function checkEmpty($email,$password,$password2){
 }
 
 function checkpwd($password,$password2){
-  if($password==$password2)
-    return true;
-  else
-    echo '<html><head><Script Language="JavaScript">alert("The two passwords don\'t match,pls try again");</Script></head></html>'.
-    "<meta http-equiv=\"refresh\" content=\"0;url=register.php\">";
+	$preg = '/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/';
+	if (preg_match($preg, $password)) {
+		// code...
+		if($password==$password2){
+			return true;
+		}else{
+			echo '<html><head><Script Language="JavaScript">alert("The two passwords don\'t match,pls try again");</Script></head></html>'.
+	    "<meta http-equiv=\"refresh\" content=\"0;url=register.php\">";
+		}
+	}else {
+		echo '<html><head><Script Language="JavaScript">alert("
+		The password should contain at least one number and one character and should be 6-20 in length,pls try again");</Script></head></html>'.
+		"<meta http-equiv=\"refresh\" content=\"0;url=register.php\">";
+	}
+
 }
 function checkEmail($email){
   $preg = '/^(\w{1,25})@(\w{1,16})(\.(\w{1,4})){1,3}$/';
@@ -90,17 +82,47 @@ function insert($email,$password){//$verify_code
 	$sucess_update=$pdo->exec($sql);
   //$result=$conn->sql($sql);
   if($sucess_update){
-		echo "<h1>yes!</h1>";
     return true;
   }else{
     echo '<html><head><Script Language="JavaScript">alert("Failed to connect to database, please try again");
     </Script></head></html>'.
     "<meta http-equiv=\"refresh\" content=\"0;url=register.php\">";
+		return false;
   }
   //$conn->close();
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$name=$_POST['name'];
+ $email=$_POST['email'];
+ $password=$_POST['password'];
+ $password2=$_POST['password2'];
+ if(checkEmpty($email,$password,$password2)){
+	 echo "check empty successfully";
+	 if(checkEmail($email)){
+		 if(checkpwd($password,$password2)){
+			 echo "check pwd successfully";
+			 //$verify_code  = codestr();
+			 //$sql="insert into user(user_id,nickname,email,password) VALUES ('99999','test','$email','$password')";
+			 $sql="insert into user(nickname,email,password) VALUES ('$name','$email','$password')";
+		 	$sucess_update=$pdo->exec($sql);
+			if($sucess_update){
+				echo '<html><head><Script Language="JavaScript">alert("Register successfully!");</Script></head></html>'.
+				"<meta http-equiv=\"refresh\" content=\"0;url=index.php\">";//注册完成，跳转到登陆页面
+			}
 
+			 //if(insert($email,$password)){
+				 //echo "insert successfully";
+				 //echo '<html><head><Script Language="JavaScript">alert("Register successfully!");</Script></head></html>'.
+				 //"<meta http-equiv=\"refresh\" content=\"0;url=movie/index5.php\">";//注册完成，跳转到登陆页面
+
+
+				 //echo"register successfully!";
+			 //}
+		 }
+	 }
+ }
+}
 
 ?>
 <body>
@@ -117,6 +139,15 @@ function insert($email,$password){//$verify_code
 					Register
 				</span>
 
+
+				<div class="wrap-input100 validate-input">
+					<input class="input100" type="text" name="name" placeholder="Name">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</span>
+				</div>
+
 				<div class="wrap-input100 validate-input">
 					<input class="input100" type="text" name="email" placeholder="email">
 
@@ -129,11 +160,6 @@ function insert($email,$password){//$verify_code
 
 				<div class="wrap-input100 validate-input">
 					<input class="input100" type="password" name="password" placeholder="password">
-					<?php
-					if(isset($password)){
-
-					}
-					?>
 
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
