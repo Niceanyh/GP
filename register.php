@@ -15,9 +15,11 @@
 
 <?php
 
-$db_hostname = "35.246.107.238"; $db_database = "ut";
-$db_username = "root";
-$db_password = "comp208"; $db_charset = "utf8mb4";
+$db_hostname = "rm-d7oxcn1pw78ncu9952o.mysql.eu-west-1.rds.aliyuncs.com";
+$db_database = "kiwi_test";
+$db_username = "team39";
+$db_password = "Comp20839";
+$db_charset = "utf8mb4";
 $dsn = "mysql:host=$db_hostname;dbname=$db_database;charset=$db_charset";
 $opt = array(
   PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -33,7 +35,25 @@ $opt = array(
 	 }
 
 
-
+	 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	 	$email=$_POST['email'];
+	 	$password=$_POST['password'];
+	 	$password2=$_POST['password2'];
+	 	if(checkEmpty($email,$password,$password2)){
+	 	  if(checkEmail($email)){
+	 	    if(checkpwd($password,$password2)){
+	 	      //$verify_code  = codestr();
+	 	      if(insert($email,$password)){
+	 					echo '<html><head><Script Language="JavaScript">alert("register successfully!");</Script></head></html>'.
+	 			    "<meta http-equiv=\"refresh\" content=\"0;url=index.php\">";//注册完成，跳转到登陆页面
+	 	        //echo"register successfully!";
+	 	        //echo '<script>location.href="./index.php"</script>';//注册完成，跳转到登陆页面
+	 					//GRANT ALL PRIVILEGES ON *.* TO ‘testuser’@'%’ IDENTIFIED BY ‘testpassword’ WITH GRANT OPTION;
+	 	      }
+	 	    }
+	 	  }
+	 	}
+	 }
 
 
 function checkEmpty($email,$password,$password2){
@@ -45,6 +65,7 @@ function checkEmpty($email,$password,$password2){
 		return true;
 	}
 }
+
 function checkpwd($password,$password2){
   if($password==$password2)
     return true;
@@ -80,25 +101,7 @@ function insert($email,$password){//$verify_code
 }
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$email=$_POST['email'];
-	$password=$_POST['password'];
-	$password2=$_POST['password2'];
-	if(checkEmpty($email,$password,$password2)){
-	  if(checkEmail($email)){
-	    if(checkpwd($password,$password2)){
-	      //$verify_code  = codestr();
-	      if(insert($email,$password)){
-					echo '<html><head><Script Language="JavaScript">alert("register successfully!");</Script></head></html>'.
-			    "<meta http-equiv=\"refresh\" content=\"0;url=index.php\">";//注册完成，跳转到登陆页面
-	        //echo"register successfully!";
-	        //echo '<script>location.href="./index.php"</script>';//注册完成，跳转到登陆页面
-					//GRANT ALL PRIVILEGES ON *.* TO ‘testuser’@'%’ IDENTIFIED BY ‘testpassword’ WITH GRANT OPTION;
-	      }
-	    }
-	  }
-	}
-}
+
 ?>
 <body>
 
