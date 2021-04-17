@@ -119,6 +119,7 @@ echo "--------------------------<br>";
 			</div>
 			<div class="clearfix"></div>
 		</div>
+
 		<div class="bootstrap_container">
 			<nav class="navbar navbar-default w3_megamenu" role="navigation">
 				<div class="navbar-header">
@@ -126,11 +127,20 @@ echo "--------------------------<br>";
 				</div><!-- end navbar-header -->
 
 				<div id="defaultmenu" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="personal-information.html">
+							<?php echo $_SESSION['email']; ?>
+						</a></li>
+
+						<li><a href="../index.php" onclick="<script type="text/javascript">
+							alert("log out successfully");
+
+							</script>">Logout</a></li>
+					</ul>
 				</div><!-- end #navbar-collapse-1 -->
 
 			</nav><!-- end navbar navbar-default w3_megamenu -->
 		</div><!-- end container -->
-
 		<!-- AddThis Smart Layers END -->
 		<div class="review-slider">
 			<ul id="flexiselDemo1">

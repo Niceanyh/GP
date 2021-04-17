@@ -1,3 +1,6 @@
+<?php
+session_start();// 存储 session 数据
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +82,11 @@
 
 				<div id="defaultmenu" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="personal-information.html">Personal</a></li>
+						<li class="active"><a href="personal-information.html">
+							<?php
+							echo $_SESSION['email'];
+							 ?>
+						</a></li>
 						<li><a href="../index.html">Logout</a></li>
 					</ul>
 				</div><!-- end #navbar-collapse-1 -->
