@@ -77,8 +77,8 @@ function checkEmail($email){
   }
 }
 //方法：将数据插入数据库中
-function insert($email,$password){//$verify_code
-  $sql="insert into user(email,password) VALUES ('$email',$password')";
+function insert($name,$email,$password){//$verify_code
+  $sql="insert into user(email,password) VALUES ('$name','$email',$password')";
 	$sucess_update=$pdo->exec($sql);
   //$result=$conn->sql($sql);
   if($sucess_update){
