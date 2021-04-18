@@ -1,7 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Select Show</title>
+	<?php
+//get variable from a form(clicked)
+
+//require_once 'connect.php';
+//本文件为登陆首页
+
+$db_hostname = "rm-d7oxcn1pw78ncu9952o.mysql.eu-west-1.rds.aliyuncs.com";
+$db_database = "kiwi_test";
+$db_username = "team39";
+$db_password = "Comp20839";
+$db_charset = "utf8mb4";
+$dsn = "mysql:host=$db_hostname;dbname=$db_database;charset=$db_charset";
+$opt = array(
+  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+  PDO::ATTR_EMULATE_PREPARES => false);
+  try {
+   $pdo = new PDO($dsn,$db_username,$db_password,$opt);
+
+
+
+$movie_title=$_GET['title'];
+
+	 ?>
+	<title>$movie_title</title>
 	<meta name="author" content="order by womengda.cn/" />
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<!-- Custom Theme files -->
@@ -12,7 +36,7 @@
 	<!-- Custom Theme files -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="My Show Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+	<meta name="keywords" content="My Show Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
@@ -26,7 +50,7 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$('#horizontalTab').easyResponsiveTabs({
-			            type: 'default', //Types: default, vertical, accordion           
+			            type: 'default', //Types: default, vertical, accordion
 			            width: 'auto', //auto or any width like 600px
 			            fit: true   // 100% fit in a container
 			        });
@@ -43,7 +67,7 @@
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
+		$(".scroll").click(function(event){
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
@@ -111,7 +135,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-8 movies-dates">	
+				<div class="col-md-8 movies-dates">
 					<div class="movie-date-selection">
 						<div class="comment">
 							<div class="client">
@@ -197,7 +221,7 @@
 					  			containerID: 'toTop', // fading element id
 								containerHoverID: 'toTopHover', // fading element hover id
 								scrollSpeed: 1200,
-								easingType: 'linear' 
+								easingType: 'linear'
 					 		};
 					 		*/
 
@@ -208,3 +232,11 @@
 					 <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 					</body>
 					</html>
+
+					<?php
+
+					$pdo = NULL;
+					} catch (PDOException $e) {
+					exit("PDO Error: ".$e->getMessage()."<br>");
+					}
+					?>

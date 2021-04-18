@@ -140,13 +140,6 @@ echo "--------------------------<br>";
 <!-- onclick="<script type="text/javascript">
 	alert("log out successfully");
 </script> " <li><a href="../index.php" >Logout</a></li>-->
-<script type="text/javascript">
-function fun1(){
-	 alert("log out successfully!");
-	 //document.write("<meta http-equiv=\"refresh\" content=\"0;url=index.php\">";);
-}
-
-</script>
 						<li><a href="../logout.php"> Logout</button></li>
 					</ul>
 				</div><!-- end #navbar-collapse-1 -->
@@ -159,9 +152,10 @@ function fun1(){
 
 				<?php
 
-				$poster_path = $pdo->query("select poster_path from movie limit 5");#where module='$module'
+				$poster_path = $pdo->query("select poster_path,title from movie limit 5");#where module='$module'
 				foreach($poster_path as $row) {
 				 $film_poster=$row['poster_path'];
+				 $film_title=$row['title'];
 				 //echo $film_poster;
 				 //echo "<img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=235 width=290><br>";
 				 //echo $row['poster_path'],"<br>";
@@ -169,7 +163,7 @@ function fun1(){
 				 echo "<div class=\"slide-title\"><h4>this is comment </h4></div>";
 				 echo "<div class=\"date-city\">";
 					 echo "<div class=\"buy-tickets\">";
-					 echo "<a href=\"movie-select-show.html\">DETAIL</a>";
+					 echo "<form><a href=\"movie-select-show.php\">$film_title</a></form>";
 					echo "</div></div>";
 					echo "</li>";
 		}
