@@ -123,7 +123,10 @@ echo "--------------------------<br>";
 		<div class="bootstrap_container">
 			<nav class="navbar navbar-default w3_megamenu" role="navigation">
 				<div class="navbar-header">
-					<button type="button" data-toggle="collapse" data-target="#defaultmenu" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand"><i class="fa fa-home"></i></a>
+					<button type="button" data-toggle="collapse" data-target="#defaultmenu"
+					class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+					<a href="#" class="navbar-brand"><i class="fa fa-home"></i></a>
 				</div><!-- end navbar-header -->
 
 				<div id="defaultmenu" class="navbar-collapse collapse">
@@ -152,18 +155,23 @@ echo "--------------------------<br>";
 
 				<?php
 
-				$poster_path = $pdo->query("select poster_path,title from movie limit 5");#where module='$module'
+				$poster_path = $pdo->query("select poster_path,title,movie_id from movie where poster_path is not null limit 7");#where module='$module'
 				foreach($poster_path as $row) {
 				 $film_poster=$row['poster_path'];
 				 $film_title=$row['title'];
+				 $film_id=$row['movie_id'];
 				 //echo $film_poster;
 				 //echo "<img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=235 width=290><br>";
 				 //echo $row['poster_path'],"<br>";
-				 echo "<li><a><img src=https://image.tmdb.org/t/p/w500/",$film_poster," height=270 width=130></a>";
+				 echo "<li><a><img src=https://image.tmdb.org/t/p/w500",$film_poster," height=270 width=130></a>";
 				 echo "<div class=\"slide-title\"><h4>this is comment </h4></div>";
 				 echo "<div class=\"date-city\">";
 					 echo "<div class=\"buy-tickets\">";
-					 echo "<form><a href=\"movie-select-show.php\">$film_title</a></form>";
+					 echo"<form method='get' action='movie-select-show.php'>
+					 <input type='hidden' name='film_id' value='$film_id'>";
+					 //这里出了一点问题，我用form之后它不像原来那样显示蓝色的框
+					 echo "<input type='submit' value='$film_title'></form>";
+					  //echo "<a href=\"movie-select-show.php\">$film_title</a></form>";
 					echo "</div></div>";
 					echo "</li>";
 		}

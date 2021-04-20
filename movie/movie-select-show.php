@@ -5,7 +5,6 @@
 //get variable from a form(clicked)
 
 //require_once 'connect.php';
-//本文件为登陆首页
 
 $db_hostname = "rm-d7oxcn1pw78ncu9952o.mysql.eu-west-1.rds.aliyuncs.com";
 $db_database = "kiwi_test";
@@ -20,12 +19,32 @@ $opt = array(
   try {
    $pdo = new PDO($dsn,$db_username,$db_password,$opt);
 
+	 $getid=$_GET['film_id'];
+	 echo "<title>$gettitle</title>";
+	 $sql_get_film="select title,poster_path,vote_average,vote_count,overview from movie where movie_id='$getid'";
+	 $result = $pdo->query($sql_get_film);
+	 $row = $result ->fetch();
+	 $get_film_title=$row['title'];
+	 $get_film_poster=$row['poster_path'];
+	 $get_vote_average=$row['vote_average'];
+	 $get_vote_count=$row['vote_count'];
+	 $get_film_overview=$row['overview'];
 
 
-$movie_title=$_GET['title'];
+	 $sql_get_director_id="select actor_id from cast where movie_id=$getid and identity='Produce: Director'";
+	 $result = $pdo->query($sql_get_director_id);
+	 $row = $result ->fetch();
+	 $get_film_director_id=$row['actor_id'];
 
-	 ?>
-	<title>$movie_title</title>
+	 $sql_get_director="select name from actor where actor_id=$get_film_director_id";
+	 $result = $pdo->query($sql_get_director);
+	 $row = $result ->fetch();
+	 $director_name=$row['name'];
+
+
+
+?>
+
 	<meta name="author" content="order by womengda.cn/" />
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<!-- Custom Theme files -->
@@ -114,24 +133,29 @@ $movie_title=$_GET['title'];
 				<div class="col-md-4 movies-by-category movie-booking">
 					<div class="movie-ticket-book">
 						<div class="clearfix"></div>
-						<img src="images/movie-show.jpg" alt="" />
+						<?php
+	//echo "<a><img src=https://image.tmdb.org/t/p/w500/",$get_film_poster,"alt='' /></a>";
+	echo "<img src=","https://image.tmdb.org/t/p/w500",$get_film_poster," alt='' />";
+	//<img src="images/movie-show.jpg" alt="" />
+						 ?>
+
 						<div class="bahubali-details">
 							<h4>Movie name:</h4>
-							<p>bahubali</p>
-							<h4>Score(total 10):</h4>
-							<p>8.7</p>
+							<p><?php echo $get_film_title;?></p>
+							<h4>Score(based on <?php echo $get_vote_count ?> votes):</h4>
+							<p><?php echo $get_vote_average ?></p>
 							<h4>Director:</h4>
-							<p>S.S. Rajamouli.</p>
+							<p><?php echo $director_name; ?></p>
 							<h4>Actor:</h4>
-							<a href="actor-information.html">Telugu</a>
+							<a href="actor-information.php">Telugu</a>
 							<a href="actor-information.html">Romance</a>
 							<a href="actor-information.html">Stephen</a>
 							<a href="actor-information.html">Tompson</a>
 							<a href="actor-information.html">Michell</a>
 							<a href="actor-information.html">Mary</a>
 							<a href="actor-information.html">Codesun</a>
-							<h4>Content Intorduce:</h4>
-							<p>Prabhas as Amarendra Baahubali and Shivudu, Rana Daggubati as Bhallala Deva in Telugu and Palvaalthevan in Tamil, Anushka Shetty as Devasena, Tamannaah as Avantika, Sathyaraj as Kattappa, Nassar as Bijjala Deva in Telugu and Pingala Devan in Tamil, Ramya Krishnan as Sivagami</p>
+							<h4>Content Introduce:</h4>
+							<p><?php echo $get_film_overview;?></p>
 						</div>
 					</div>
 				</div>
