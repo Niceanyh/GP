@@ -12,6 +12,8 @@ session_start();// 存储 session 数据
 	-->
 	<?php
 	echo "session: ",$_SESSION['email'],"<br>";
+	//echo "<a href='javascript:alert(123);'>点我弹出123</a>";
+
 //database
 $db_hostname = "rm-d7oxcn1pw78ncu9952o.mysql.eu-west-1.rds.aliyuncs.com";
 $db_database = "kiwi_test";
@@ -131,11 +133,13 @@ echo "--------------------------<br>";
 
 				<div id="defaultmenu" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="personal-information.html">
+						<li class='active'><a href='personal-information.html'>
 							<?php
 							if(isset($_SESSION['email'])){
+
 								echo $_SESSION['email'];
 							}else {
+								//echo "<li class='active'><a href='../visitor_warning.php'>";
 								echo "Vistor";
 							}
 							?>
@@ -143,7 +147,15 @@ echo "--------------------------<br>";
 <!-- onclick="<script type="text/javascript">
 	alert("log out successfully");
 </script> " <li><a href="../index.php" >Logout</a></li>-->
-						<li><a href="../logout.php"> Logout</button></li>
+<?php
+if (isset($_SESSION['email'])) {
+	echo "<li><a href='../logout.php'> Logout</a></li>";
+}else {
+	echo "<li><a href='../visitor_logout.php'> Logout</a></li>";
+}
+//<li><a href="../logout.php"> Logout</button></li>
+ ?>
+
 					</ul>
 				</div><!-- end #navbar-collapse-1 -->
 

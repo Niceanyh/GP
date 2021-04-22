@@ -41,6 +41,11 @@ $opt = array(
 	 $row = $result ->fetch();
 	 $director_name=$row['name'];
 
+	 $sql_get_actor_id="select actor_id from cast where movie_id=$getid and identity like 'Act: %'";
+	 $get_film_actor_id = $pdo->query($sql_get_actor_id);
+	 //$row = $result ->fetch();
+	 //$get_film_actor_id=$row['actor_id'];
+
 
 
 ?>
@@ -120,7 +125,23 @@ $opt = array(
 
 					<div id="defaultmenu" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="../index.html">Logout</a></li>
+								<li class="active"><a href="personal-information.php">
+									<?php
+									if(isset($_SESSION['email'])){
+										echo $_SESSION['email'];
+									}else {
+										echo "Vistor";
+									}
+									?>
+								</a></li>
+							<?php
+							if (isset($_SESSION['email'])) {
+								echo "<li><a href='../logout.php'> Logout</a></li>";
+							}else {
+								echo "<li><a href='../visitor_logout.php'> Logout</a></li>";
+							}
+						 ?>
+
 						</ul><!-- end nav navbar-nav navbar-right -->
 					</div><!-- end #navbar-collapse-1 -->
 
@@ -138,7 +159,6 @@ $opt = array(
 	echo "<img src=","https://image.tmdb.org/t/p/w500",$get_film_poster," alt='' />";
 	//<img src="images/movie-show.jpg" alt="" />
 						 ?>
-
 						<div class="bahubali-details">
 							<h4>Movie name:</h4>
 							<p><?php echo $get_film_title;?></p>
@@ -147,13 +167,24 @@ $opt = array(
 							<h4>Director:</h4>
 							<p><?php echo $director_name; ?></p>
 							<h4>Actor:</h4>
-							<a href="actor-information.php">Telugu</a>
-							<a href="actor-information.html">Romance</a>
-							<a href="actor-information.html">Stephen</a>
-							<a href="actor-information.html">Tompson</a>
-							<a href="actor-information.html">Michell</a>
-							<a href="actor-information.html">Mary</a>
-							<a href="actor-information.html">Codesun</a>
+							<?php
+								//$film_name = $pdo->query("select title,vote_average from movie limit 15");
+								foreach($get_film_actor_id as $row) {
+									$get_one_actor_id=$row['actor_id'];
+									$sql_get_actor_name="select name from actor where actor_id=$get_one_actor_id";
+							 	 	$result = $pdo->query($sql_get_actor_name);
+									$line = $result ->fetch();
+									$get_film_actor_name=$line['name'];
+									//echo "<a href='actor.php'>$get_film_actor_name </a>";
+									echo "<form method='get' name='form1' action='actor.php'>
+										<input type='hidden' name='actor_id' value='$get_one_actor_id'>
+									</form>
+										<a href='javascript:form1.submit();'>",$get_film_actor_name,"</a>";
+
+									}
+									//<a href="actor-information.php">Telugu</a>
+									?>
+
 							<h4>Content Introduce:</h4>
 							<p><?php echo $get_film_overview;?></p>
 						</div>
