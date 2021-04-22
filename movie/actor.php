@@ -18,7 +18,7 @@
 			PDO::ATTR_EMULATE_PREPARES => false);
 			try {
 				$pdo = new PDO($dsn,$db_username,$db_password,$opt);
-       //$get_actor_id=$_GET['actor_id'];
+       $get_actor_id=$_GET['m'];
 
 	?>
 
@@ -112,7 +112,7 @@
 					<div class="movie-ticket-book">
 						<div class="clearfix"></div>
 						<?php
-						$actor_profile_path = $pdo->query("select profile_path from actor where actor_id =2 ");#where module='$module'
+						$actor_profile_path = $pdo->query("select profile_path from actor where actor_id =$get_actor_id ");#where module='$module'
 						$row = $actor_profile_path ->fetch();
 						 $profile_path=$row['profile_path'];
 						 //echo $film_poster;
@@ -128,7 +128,7 @@
 						<div class="bahubali-details">
 							<h4>name:</h4>
 							<?php
-							$actor_name = $pdo->query("select name from actor where actor_id = 2 ");#where module='$module'
+							$actor_name = $pdo->query("select name from actor where actor_id = $get_actor_id ");#where module='$module'
 							$row = $actor_name ->fetch();
 							 $name=$row['name'];
 								 echo "$name";
@@ -136,7 +136,7 @@
 
 							<h4>date of birth:</h4>
 							<?php
-							$actor_birthday = $pdo->query("select date_birth from actor where actor_id = 2");#where module='$module'
+							$actor_birthday = $pdo->query("select date_birth from actor where actor_id = $get_actor_id");#where module='$module'
 							$row = $actor_birthday ->fetch();
 							 $date_birth=$row['date_birth'];
 							 $date_birth= date('Y-m-d',strtotime($date_birth));
@@ -145,7 +145,7 @@
 
 							<h4>gender:</h4>
 							<?php
-							$actor_gender = $pdo->query("select gender from actor where actor_id =2 ");#where module='$module'
+							$actor_gender = $pdo->query("select gender from actor where actor_id =$get_actor_id ");#where module='$module'
 							$row = $actor_gender ->fetch();
 							 $gender=$row['gender'];
 								 echo "$gender";
@@ -153,7 +153,7 @@
 
 							<h4>Person Intorduce:</h4>
 							<?php
-							$actor_biography = $pdo->query("select biography from actor where actor_id =2 ");#where module='$module'
+							$actor_biography = $pdo->query("select biography from actor where actor_id =$get_actor_id ");#where module='$module'
 							$row = $actor_biography ->fetch();
 							 $biography=$row['biography'];
 								 echo "$biography";
@@ -168,7 +168,7 @@
 							<li class="location">
 
 									<?php
-								$actor_movie_id = $pdo->query("select movie_id from cast where actor_id = 2");#where module='$module'
+								$actor_movie_id = $pdo->query("select movie_id from cast where actor_id = $get_actor_id");#where module='$module'
 								foreach($actor_movie_id as $row) {
 								 $movie_id=$row['movie_id'];
 
@@ -178,7 +178,7 @@
 								$row = $movie_title ->fetch();
 								$title=$row['title'];
 								 echo "<i class='fa fa-star'></i>";
-								 echo "<a href='movie-select-show.php'>$title</a><br>";
+								 echo "<a href='movie-select-show.php?v=$movie_id'>$title</a><br>";
 								$row = $movie_vote_average ->fetch();
 								$vote_average=$row['vote_average'];
 								echo "Rating: ";

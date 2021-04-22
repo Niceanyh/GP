@@ -133,7 +133,7 @@ echo "--------------------------<br>";
 
 				<div id="defaultmenu" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li class='active'><a href='personal-information.html'>
+						<li class='active'><a href='personal-information.php'>
 							<?php
 							if(isset($_SESSION['email'])){
 
