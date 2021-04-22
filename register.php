@@ -34,10 +34,6 @@ $opt = array(
 	 	#echo "<p1>$row["time"]</p1>";
 
 
-
-
-
-
 function checkEmpty($email,$password,$password2){
 	if($email==null||$password==null||$password2==null){
 		echo '<html><head><Script Language="JavaScript">alert("You have enter all info to regist");</Script></head></html>'.
