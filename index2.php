@@ -16,6 +16,37 @@
 </head>
 <?php
 //本文件为重设密码界面
+
+//require_once 'connect.php';
+
+$db_hostname = "rm-d7oxcn1pw78ncu9952o.mysql.eu-west-1.rds.aliyuncs.com";
+$db_database = "kiwi_test";
+$db_username = "team39";
+$db_password = "Comp20839";
+$db_charset = "utf8mb4";
+$dsn = "mysql:host=$db_hostname;dbname=$db_database;charset=$db_charset";
+$opt = array(
+  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+  PDO::ATTR_EMULATE_PREPARES => false);
+  try {
+   $pdo = new PDO($dsn,$db_username,$db_password,$opt);
+
+	 function checkEmpty($email,$password,$password2){
+	 	if($email==null||$password==null||$password2==null){
+	 		echo '<html><head><Script Language="JavaScript">alert("You have enter all info to regist");</Script></head></html>'.
+	 		 "<meta http-equiv=\"refresh\" content=\"0;url=register.php\">";
+	 	}
+	 	else{
+	 		return true;
+	 	}
+	 }
+
+
+
+
+
+
 $email=$_POST['email'];
 $password=$_POST['password'];
 $password2=$_POST['password2'];
@@ -142,3 +173,11 @@ if(checkEmpty($email,$password,$password2)){
 
 </body>
 </html>
+
+<?php
+
+$pdo = NULL;
+} catch (PDOException $e) {
+exit("PDO Error: ".$e->getMessage()."<br>");
+}
+?>
